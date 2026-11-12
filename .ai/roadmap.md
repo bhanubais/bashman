@@ -20,11 +20,11 @@
   - Fail gracefully with clear error when required variable is unbound.
 
 ## Milestone 3: Single-Request `.http` Parser
-- [ ] **M3.1: Request Line & Header Parsing**
+- [x] **M3.1: Request Line & Header Parsing**
   - Extract Method and Target URL from line 1 (default to `GET` if method omitted).
   - Extract key-value headers up to first empty line.
   - Support inline comment lines (`#` or `//`) skipping.
-- [ ] **M3.2: Request Body Extraction**
+- [x] **M3.2: Request Body Extraction**
   - Stream raw request body following the blank line.
   - Ensure zero corruption of multi-line payloads, JSON indentation, quotes, or trailing newlines.
 

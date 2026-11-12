@@ -1,0 +1,123 @@
+#!/usr/bin/env bash
+# bashman: Stateless API Client CLI
+set -eou pipefail
+
+VERSION="0.1.0"
+
+# Determine script root directory
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+  DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+ROOT_DIR="$(cd -P "$(dirname "$SOURCE")/.." && pwd)"
+
+source "$ROOT_DIR/lib/doctor.sh"
+
+show_help() {
+  cat <<'EOF'
+bashman - Stateless API Client & Network Request Orchestrator
+
+Usage:
+  bashman [command] [options] <arguments>
+
+Commands:
+  run <file.http>      Execute the single-request .http file
+  doctor               Inspect toolchain dependencies and report engine tier
+
+Options:
+  --env <name>         Load cascading environment (.env.<name>)
+  --dry-run            Parse and display the prepared request without dispatching
+  -h, --help           Show this help manual
+  -v, --version        Show current version
+
+EOF
+}
+
+show_version() {
+  printf "bashman v%s\n" "$VERSION"
+}
+
+# Main CLI Router
+if [[ $# -eq 0 ]]; then
+  show_help
+  exit 0
+fi
+
+case "$1" in
+  -h|--help)
+    show_help
+    exit 0
+    ;;
+  -v|--version)
+    show_version
+    exit 0
+    ;;
+  doctor)
+    run_doctor
+    exit $?
+    ;;
+  run)
+    shift
+    # shellcheck disable=SC2034  # Consumed by lib/dispatcher.sh in Milestone 4
+    ENV_NAME=""
+    # shellcheck disable=SC2034  # Consumed by lib/dispatcher.sh in Milestone 4
+    DRY_RUN=0
+    TARGET_FILE=""
+
+    while [[ $# -gt 0 ]]; do
+      case "$1" in
+        --env)
+          if [[ -z "${2:-}" ]]; then
+            printf "[bashman] error: --env requires an environment name argument\n" >&2
+            exit 2
+          fi
+          ENV_NAME="$2"
+          shift 2
+          ;;
+        --dry-run)
+          DRY_RUN=1
+          shift
+          ;;
+        -*)
+          printf "[bashman] error: Unknown option '%s'\n" "$1" >&2
+          exit 2
+          ;;
+        *)
+          if [[ -z "$TARGET_FILE" ]]; then
+            TARGET_FILE="$1"
+          else
+            printf "[bashman] error: Multiple request files specified ('%s' and '%s'). Only single-request files supported.\n" "$TARGET_FILE" "$1" >&2
+            exit 2
+          fi
+          shift
+          ;;
+      esac
+    done
+
+    if [[ -z "$TARGET_FILE" ]]; then
+      printf "[bashman] error: missing target .http file\n" >&2
+      printf "Usage: bashman run [--env <name>] [--dry-run] <file.http>\n" >&2
+      exit 2
+    fi
+
+    if [[ ! -f "$TARGET_FILE" ]]; then
+      printf "[bashman] error: request file '%s' not found\n" "$TARGET_FILE" >&2
+      exit 1
+    fi
+
+    printf "[bashman] Ready to execute %s\n" "$TARGET_FILE"
+    exit 0
+    ;;
+  -*)
+    printf "[bashman] error: Unknown option '%s'\n" "$1" >&2
+    show_help >&2
+    exit 2
+    ;;
+  *)
+    printf "[bashman] error: Unknown command '%s'\n" "$1" >&2
+    show_help >&2
+    exit 2
+    ;;
+esac

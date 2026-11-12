@@ -1,22 +1,26 @@
 # Project State & Semantic Versioning
 
 ## Current SemVer
-`0.1.0` (Pre-release Initialization)
+`0.1.0` (In Development)
 
 ## Current Phase
-**Phase 2: Meta-Scaffolding (Awaiting User Review)**
+**Phase 3: Execution & Iteration (The TDD Loop)**
 
-## System Status
-- **Architecture Locked:** Yes ([architecture.md](file:///E:/Project/bashman/.ai/architecture.md))
-- **Roadmap Defined:** Yes ([roadmap.md](file:///E:/Project/bashman/.ai/roadmap.md))
-- **Execution Mode:** Awaiting Phase 2 sign-off ("Proceed to next phase.") before initiating TDD Loop in Phase 3.
+## Active Feature
+**Milestone 3: Single-Request `.http` Parser**
+
+## Status
+- **Step A (Write Tests):** Completed. Tests authored in [`tests/test_http_parser.sh`](file:///E:/Project/bashman/tests/test_http_parser.sh) and verified in failing (RED) state.
+- **Step B (Implementation):** Pending user confirmation.
+- **Step C (Verification & Commit):** Pending.
 
 ## Completed Milestones
 - [x] Phase 1: Acid Test & Reality Audit
 - [x] Phase 2: Meta-Files Scaffolding (`.ai/` directory and operational skills)
+- [x] Milestone 1: Core Scaffolding, CLI Shell & Diagnostics (`bashman doctor`)
+- [x] Milestone 2: Environment Loader & Literal Variable Interpolation
 
-## Next Milestone
-- Milestone 1: Core Scaffolding & Toolchain Diagnostics (`M1.1: Project Structure & Test Harness`)
-
-## Granular Git Commit History (Planned / Executed)
-- `chore(ai): scaffold meta-directory and operational specs for bashman v0.1.0` (Pending git commit)
+## Suggested Git Commits for Completed Work
+1. `feat(meta): scaffold .ai meta-framework and operational skills`
+2. `feat(cli): implement CLI router, test harness, and doctor diagnostics`
+3. `feat(env): add cascading .env loader and awk literal interpolator`

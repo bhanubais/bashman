@@ -1,19 +1,19 @@
 # bashman Technical Roadmap & Milestone Plan
 
 ## Milestone 1: Core Scaffolding & Toolchain Diagnostics
-- [ ] **M1.1: Project Structure & Test Harness**
+- [x] **M1.1: Project Structure & Test Harness**
   - Establish `bin/`, `lib/`, `tests/` directories.
   - Set up a lightweight, deterministic bash test runner (POSIX compliant, zero-external-dependency test assertions).
-- [ ] **M1.2: Toolchain Detection (`bashman doctor`)**
+- [x] **M1.2: Toolchain Detection (`bashman doctor`)**
   - Implement `$PATH` detector for foundational tools (`curl`, `jq`, `awk`).
   - Implement `$PATH` detector for accelerated tools (`xh`, `sd`, `bat`).
   - Output clean diagnostic table reporting active engine tier (Foundational vs. Accelerated).
 
 ## Milestone 2: Environment Loader & Literal Variable Interpolation
-- [ ] **M2.1: Cascading `.env` Loader**
+- [x] **M2.1: Cascading `.env` Loader**
   - Safely source `.env` (base) followed by `.env.<name>` without leaking variables to host parent shell.
   - Handle missing files, blank lines, and comments cleanly.
-- [ ] **M2.2: Safe Literal Token Substitutor**
+- [x] **M2.2: Safe Literal Token Substitutor**
   - Detect `{{VARIABLE}}` patterns.
   - Implement fallback `awk` literal substitution engine (immune to `/`, `&`, `\`, `$`).
   - Implement accelerated `sd` substitution engine when present.

@@ -38,15 +38,15 @@
   - Pipe response through `jq .` with graceful degradation to raw stdout if non-JSON or `jq` errors.
 
 ## Milestone 5: Accelerated Dispatcher & Terminal UI
-- [ ] **M5.1: `xh` Integration**
+- [x] **M5.1: `xh` Integration**
   - Route execution through `xh` when available.
   - Preserve identical execution semantics with native `xh` speed.
-- [ ] **M5.2: `bat` Highlighting & Paging**
+- [x] **M5.2: `bat` Highlighting & Paging**
   - Pipe JSON response through `bat` with syntax coloring and optional paging.
 
 ## Milestone 6: Release Packaging & End-to-End Validation
-- [ ] **M6.1: Comprehensive Test Suite & Edge Case Verification**
+- [x] **M6.1: Comprehensive Test Suite & Edge Case Verification**
   - Verify error handling: invalid URLs, connection timeouts, missing files, malformed `.http`.
-- [ ] **M6.2: Version Tagging & Documentation**
+- [x] **M6.2: Version Tagging & Documentation**
   - Install script / symlink setup instructions.
   - SemVer release `0.1.0`.

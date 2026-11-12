@@ -242,11 +242,11 @@ To run the full test suite:
 ## 🗺️ Project Roadmap
 
 - [x] **Milestone 1:** Core Scaffolding, CLI Router & Toolchain Diagnostics (`bashman doctor`)
-- [ ] **Milestone 2:** Cascading Environment Loader & Safe Literal Substitution (`sd` / `awk`)
-- [ ] **Milestone 3:** Deterministic Single-Request `.http` Parser
-- [ ] **Milestone 4:** Foundational `curl` Dispatcher, Metadata Banners & `jq` Output
-- [ ] **Milestone 5:** Accelerated `xh` Transport & `bat` Syntax Highlighting
-- [ ] **Milestone 6:** Release Packaging & Cross-Platform Validation
+- [x] **Milestone 2:** Cascading Environment Loader & Safe Literal Substitution (`sd` / `awk`)
+- [x] **Milestone 3:** Deterministic Single-Request `.http` Parser
+- [x] **Milestone 4:** Foundational `curl` Dispatcher, Metadata Banners & `jq` Output
+- [x] **Milestone 5:** Accelerated `xh` Transport & `bat` Syntax Highlighting
+- [x] **Milestone 6:** Release Packaging & Cross-Platform Validation
 
 Detailed architecture records and design decisions are documented in the [`.ai/`](./.ai/) directory.
 

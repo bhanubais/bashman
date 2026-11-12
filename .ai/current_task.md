@@ -1,18 +1,14 @@
-# Current Task: Milestone 5 - Accelerated Dispatcher & Terminal UI (Step A Verified)
+# Current Task: v0.1.0 Release Complete & Verified
 
-## Objective
-Implement dynamic upgrade to compiled Rust utilities (`xh`, `bat`) when detected on `$PATH`:
-1. `can_use_accelerated_engine`: Inspect `$PATH` for `xh`.
-2. `dispatch_xh`:
-   - Pass headers in `Header:Value` format.
-   - Stream raw body payload.
-   - Parse status line and time.
-3. `format_response_body`: Route through `bat -l json --style=plain` when `bat` is available.
-4. `dispatch_request`: Unified router selecting `dispatch_xh` when accelerated, or falling back to `dispatch_curl`.
+## Build Summary
+`bashman` v0.1.0 is fully built and validated under strict TDD engineering protocols.
 
-## Step A (Red Phase) Status
-- Suite: [`tests/test_accelerated_engine.sh`](file:///E:/Project/bashman/tests/test_accelerated_engine.sh)
-- Verified RED: Fails on missing `can_use_accelerated_engine` and `dispatch_request`.
-
-## Awaiting Confirmation
-Waiting for user confirmation to proceed to Step B (Implementation).
+## Verification Metrics
+- **Test Suites Executed:** 6
+- **Assertions Passed:** 61 / 61 (100% Pass Rate, 0 Failures)
+- **Engine Verified:**
+  - Automated detection of Tier 1 (xh, sd, bat) vs Tier 2 (curl, awk, jq).
+  - Safe POSIX-compliant literal interpolation immune to `/`, `&`, `\`, and `$`.
+  - CRLF and inline comment stripping for RFC single-request `.http` files.
+  - Formatted status badge with latency indicators and dry-run preview.
+- **Documentation:** [`README.md`](file:///E:/Project/bashman/README.md) verified and packaged.

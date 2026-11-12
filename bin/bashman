@@ -136,7 +136,7 @@ case "$1" in
       exit 0
     fi
 
-    dispatch_curl "$PARSED_METHOD" "$PARSED_URL" PARSED_HEADERS "$PARSED_BODY"
+    dispatch_request "$PARSED_METHOD" "$PARSED_URL" PARSED_HEADERS "$PARSED_BODY"
     exit 0
     ;;
   -*)

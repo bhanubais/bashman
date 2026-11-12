@@ -1,17 +1,18 @@
-# Current Task: Milestone 4 - Foundational Dispatcher & Presentation Pipeline (Step A Verified)
+# Current Task: Milestone 5 - Accelerated Dispatcher & Terminal UI (Step A Verified)
 
 ## Objective
-Implement request execution via foundational `curl` and presentation pipeline:
-1. `bin/bashman run --dry-run <file.http>`: Parse request, interpolate environment, and format request preview without network execution.
-2. `lib/dispatcher.sh`:
-   - `dispatch_curl`: Construct curl arguments (`-X`, `-H`, `--data-binary @-`, `-w "\n__BASHMAN_META__:%{http_code}:%{time_total}s\n"`).
-   - `parse_curl_output`: Delimit HTTP status, total time, and response body.
-   - `format_status_badge`: ANSI color-coded status badges (`[200 OK]`, `[404 Not Found]`, `[500 Server Error]`).
-   - `format_response_body`: Pipe formatted JSON through `jq .` with raw fallback.
+Implement dynamic upgrade to compiled Rust utilities (`xh`, `bat`) when detected on `$PATH`:
+1. `can_use_accelerated_engine`: Inspect `$PATH` for `xh`.
+2. `dispatch_xh`:
+   - Pass headers in `Header:Value` format.
+   - Stream raw body payload.
+   - Parse status line and time.
+3. `format_response_body`: Route through `bat -l json --style=plain` when `bat` is available.
+4. `dispatch_request`: Unified router selecting `dispatch_xh` when accelerated, or falling back to `dispatch_curl`.
 
 ## Step A (Red Phase) Status
-- Suite: [`tests/test_dispatcher_and_dryrun.sh`](file:///E:/Project/bashman/tests/test_dispatcher_and_dryrun.sh)
-- Verified RED: Fails on missing `lib/dispatcher.sh`.
+- Suite: [`tests/test_accelerated_engine.sh`](file:///E:/Project/bashman/tests/test_accelerated_engine.sh)
+- Verified RED: Fails on missing `can_use_accelerated_engine` and `dispatch_request`.
 
 ## Awaiting Confirmation
 Waiting for user confirmation to proceed to Step B (Implementation).

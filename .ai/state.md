@@ -7,14 +7,15 @@
 **Phase 3: Execution & Iteration (The TDD Loop)**
 
 ## Active Feature
-**Milestone 4: Foundational Dispatcher & Presentation Pipeline**
+**Milestone 5: Accelerated Dispatcher & Terminal UI (`xh` + `bat`)**
 
 ## Status
 - **Milestone 1:** Completed (CLI Router, Test Harness, `bashman doctor`).
 - **Milestone 2:** Completed (Environment Cascading & Safe Interpolator).
 - **Milestone 3:** Completed (Single-Request `.http` Parser).
-- **Milestone 4:**
-  - **Step A (Write Tests):** Completed. Tests authored in [`tests/test_dispatcher_and_dryrun.sh`](file:///E:/Project/bashman/tests/test_dispatcher_and_dryrun.sh) and verified in failing (RED) state.
+- **Milestone 4:** Completed (Foundational Dispatcher, Dry-run Preview & Status Badge).
+- **Milestone 5:**
+  - **Step A (Write Tests):** Completed. Tests authored in [`tests/test_accelerated_engine.sh`](file:///E:/Project/bashman/tests/test_accelerated_engine.sh) and verified in failing (RED) state.
   - **Step B (Implementation):** Pending user confirmation.
   - **Step C (Verification & Commit):** Pending.
 
@@ -24,9 +25,7 @@
 - [x] Milestone 1: Core Scaffolding, CLI Shell & Diagnostics (`bashman doctor`)
 - [x] Milestone 2: Environment Loader & Literal Variable Interpolation
 - [x] Milestone 3: Single-Request `.http` Parser
+- [x] Milestone 4: Foundational Dispatcher & Presentation Pipeline
 
-## Suggested Git Commits for Completed Work
-1. `feat(meta): scaffold .ai meta-framework and operational skills`
-2. `feat(cli): implement CLI router, test harness, and doctor diagnostics`
-3. `feat(env): add cascading .env loader and awk literal interpolator`
-4. `feat(parser): add single-request .http parser with CRLF support`
+## Single Composite Commit Phrase (for completed Milestones 1–4)
+`feat(core): implement bashman stateless API client with doctor diagnostics, cascading env loader, single-request parser, and curl dry-run dispatcher`

@@ -13,7 +13,14 @@ while [ -h "$SOURCE" ]; do
 done
 ROOT_DIR="$(cd -P "$(dirname "$SOURCE")/.." && pwd)"
 
+# shellcheck source=../lib/doctor.sh
 source "$ROOT_DIR/lib/doctor.sh"
+# shellcheck source=../lib/interpolator.sh
+source "$ROOT_DIR/lib/interpolator.sh"
+# shellcheck source=../lib/http_parser.sh
+source "$ROOT_DIR/lib/http_parser.sh"
+# shellcheck source=../lib/dispatcher.sh
+source "$ROOT_DIR/lib/dispatcher.sh"
 
 show_help() {
   cat <<'EOF'
@@ -60,9 +67,7 @@ case "$1" in
     ;;
   run)
     shift
-    # shellcheck disable=SC2034  # Consumed by lib/dispatcher.sh in Milestone 4
     ENV_NAME=""
-    # shellcheck disable=SC2034  # Consumed by lib/dispatcher.sh in Milestone 4
     DRY_RUN=0
     TARGET_FILE=""
 
@@ -107,7 +112,31 @@ case "$1" in
       exit 1
     fi
 
-    printf "[bashman] Ready to execute %s\n" "$TARGET_FILE"
+    # 1. Load cascading environment from file directory or working directory
+    file_dir="$(cd "$(dirname "$TARGET_FILE")" && pwd)"
+    load_environment "$file_dir" "$ENV_NAME"
+
+    # 2. Parse single-request .http file
+    parse_http_file "$TARGET_FILE"
+
+    # 3. Interpolate variables into URL, headers, and body
+    PARSED_URL=$(interpolate_template "$PARSED_URL")
+    if [[ "${#PARSED_HEADERS[@]}" -gt 0 ]]; then
+      for idx in "${!PARSED_HEADERS[@]}"; do
+        PARSED_HEADERS[idx]=$(interpolate_template "${PARSED_HEADERS[idx]}")
+      done
+    fi
+    if [[ -n "$PARSED_BODY" ]]; then
+      PARSED_BODY=$(interpolate_template "$PARSED_BODY")
+    fi
+
+    # 4. Dry-run or Network Dispatch
+    if [[ "$DRY_RUN" -eq 1 ]]; then
+      execute_dry_run "$PARSED_METHOD" "$PARSED_URL" PARSED_HEADERS "$PARSED_BODY"
+      exit 0
+    fi
+
+    dispatch_curl "$PARSED_METHOD" "$PARSED_URL" PARSED_HEADERS "$PARSED_BODY"
     exit 0
     ;;
   -*)

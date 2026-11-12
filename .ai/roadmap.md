@@ -29,10 +29,10 @@
   - Ensure zero corruption of multi-line payloads, JSON indentation, quotes, or trailing newlines.
 
 ## Milestone 4: Foundational Dispatcher & Presentation Pipeline
-- [ ] **M4.1: `curl` Network Dispatcher & Dry-Run**
+- [x] **M4.1: `curl` Network Dispatcher & Dry-Run**
   - Build `curl` command builder passing extracted method, headers, and piped body via `--data-binary @-`.
   - Implement `--dry-run` flag to inspect generated command/payload without network execution.
-- [ ] **M4.2: Response Metadata Banner & JSON Formatting**
+- [x] **M4.2: Response Metadata Banner & JSON Formatting**
   - Capture HTTP status code and total execution time via `curl -w`.
   - Format status badge and latency indicator.
   - Pipe response through `jq .` with graceful degradation to raw stdout if non-JSON or `jq` errors.
